@@ -3,11 +3,8 @@
 
 <head>
     <title> Best Place to Live </title>
-    <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
-
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -22,7 +19,9 @@
         <div data-role="header">
             <fieldset data-role="controlgroup" data-type="horizontal">
                 <input type="radio" name="radio-view" id="map_sel" value="list" checked="checked" />
-                <label for="map_sel">Map</label>
+                <label for="map_sel">Nation</label>
+                <input type="radio" name="radio-view" id="nj_sel" value="grid" />
+                <label for="nj_sel">NJ</label>
                 <input type="radio" name="radio-view" id="data_sel" value="grid" />
                 <label for="data_sel">Data</label>
             </fieldset>
@@ -30,12 +29,16 @@
 
 
 
-        <div data-role="content" id="dt1" style="display:none">
+        <div id="dt1" style="display:none">
         </div>
-        <div id="map" data-role="content" style="height:900px;width:1250px">
+        <div id="map" data-role="content" style="position:relative;max-width:100%;
+              max-height:100%;height:850px;">
 
             <!-- <H1>Best places to live - Overall Score (out of 500)</H1> -->
-            <iframe src="map.html" style="height:900px;width:1250px"></iframe>
+            <iframe src="map.html" style="width:100%;height:100%"></iframe>
+
+        </div>
+        <div id="dt2" style="display:none">
 
         </div>
     </div>
@@ -45,11 +48,18 @@
         $(document).ready(function() {
             $('#map_sel').change(function() {
                 //alert("Hi");
-                $("#dt1").attr("style", "display:none");
-                $("#map").attr("style", "display:block;height:900px;width:1250px");
+                $("#dt1").css("display", "none");
+                $("#dt2").css("display", "none");
+                $("#map").css("display", "block");
             });
             $('#data_sel').change(function() {
                 $("#dt1").css("display", "block");
+                $("#dt2").css("display", "none");
+                $("#map").css("display", "none");
+            });
+            $('#nj_sel').change(function() {
+                $("#dt1").css("display", "none");
+                $("#dt2").css("display", "block");
                 $("#map").css("display", "none");
             });
             load_data();
@@ -84,7 +94,7 @@
             places = data;
             console.log(data[1]);
             google.charts.load('current', {
-                'packages': ['table']
+                'packages': ['table', 'corechart', 'bar']
             });
             google.charts.setOnLoadCallback(drawTable);
         }
