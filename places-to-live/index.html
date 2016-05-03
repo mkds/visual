@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Sample </title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+  <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="http://d3js.org/queue.v1.min.js"></script>
+  <script type="text/javascript" src="http://d3js.org/topojson.v1.min.js"></script>
+  <link rel="stylesheet" href="./css/style.css" />
+
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header">
+    	    <fieldset data-role="controlgroup" data-type="horizontal">
+    	         	<input type="radio" name="radio-view" id="map_sel" value="list" checked="checked" />
+    	         	<label for="map_sel">Map</label>
+    	         	<input type="radio" name="radio-view" id="data_sel" value="grid"  />
+    	         	<label for="data_sel">Data</label>
+    	      </fieldset>
+    	</div>
+
+
+
+<div data-role="content" id="dt1" style="display:none">
+</div>
+<div id="map" data-role="content" style="height:900px;width:1250px">
+
+  <!-- <H1>Best places to live - Overall Score (out of 500)</H1> -->
+  <iframe src="map.html" style="width:100%;height:100%"></iframe>
+
+</div>
+</div>
+
+<script>
+var a = true;
+$(document).ready(function(){
+  $('#map_sel').change(function(){
+        //alert("Hi");
+          $("#dt1").attr("style","display:none");
+          $("#map").attr("style","display:block;height:900px;width:1250px");
+        });
+  $('#data_sel').change(function(){
+          $("#dt1").css("display","block");
+          $("#map").css("display","none");
+        });
+  load_data();
+});
+</script>
+<script>
+//Read Data
+var places=[];
+//Load Data
+function load_data(){
+
+d3.csv("./data/place_score.csv",
+            function(data) {
+                return {
+              /*      Convert Height and Weight to Numeric */
+                    State  : data["State"],
+                    County : data["County"],
+                    Overall_Score : +data["Overall"],
+                    Facilities: +data["Facilities"],
+                    Health_Cost : +data["Health_Cost"],
+                    Saftey : +data["Saftey"],
+                    Social_association : +data["Social_association"],
+                    Primary_care : +data["Primary_care"]
+
+                  };
+                },
+                process_data
+               );
+}
+function process_data(data){
+  places = data;
+  console.log(data[1]);
+  google.charts.load('current', {'packages':['table']});
+  google.charts.setOnLoadCallback(drawTable);
+}
+
+</script>
+<script type="text/javascript" src="./js/drawTable.js"></script>
+</body>
+</html>
