@@ -7,12 +7,13 @@ path {
 
 path:hover {
   stroke:black;
-  stroke-width: 2px;
+  stroke-width: 1px;
   z-index: 1
 }
 
-body {
+html,body, .container-fluid {
   font-family: Arial, sans-serif;
+  height: 100%;
 }
 
 .city {
@@ -36,4 +37,64 @@ body {
   border-radius: 8px;
   pointer-events: none;
 
+}
+/*Nav menu*/
+.nav-pills>li>a {
+    border-radius: 5px;
+    /*border-color: #337ab7;*/
+    background: #f1eef6;
+    color: black;
+    margin: 0;
+}
+.nav > li {
+    /*float:right;*/
+    position: relative;
+    left: 80%;
+    /*height: 1.2em;*/
+    /*font-size: 1.2em;*/
+    margin-bottom: 0;
+    /*padding: -3px;*/
+    /*height: 34px;*/
+}
+
+.nav-pills>li+li{
+    margin: 2px;
+}
+.nav-pills>li>a {
+    height: 34px;
+    padding-top: 7px;
+    /*color: white;*/
+}
+.nav-pills>li>a:hover {
+    background: #74a9cf;
+    color: white;
+
+
+}
+
+.search-header {
+    /*position: absolute;*/
+    padding: 5px 0;
+    color: white;
+    /*font-size: 2em;*/
+    height: 3.25em;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0,0,0,.1);
+    background-color: #6f5499;
+    /*margin:0 -15px 0 -15px;*/
+
+}
+.search-header .search-form{
+    position: relative;
+    /*left: 0%;*/
+
+    width:400px;
+}
+.search-header .input-group{
+    position: absolute;
+    left: 30%;
+    width:200px;
+}
+.visual {
+    height:90%;
 }

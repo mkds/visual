@@ -1,5 +1,5 @@
 (function() {
-    /*global d3 google topojson queue*/
+    /*global d3 google topojson */
     var places = {};
 
     d3.csv("./data/place_score.csv",
@@ -33,8 +33,9 @@
     function draw_map(place_score) {
         /*eslint-env d3, jquery*/
         /*global d3*/
-        var width = 1200;
-        var height = 650;
+        var width = $("#map").width() *.9;
+        var height = $("#map").height();
+        console.log(height);
 
         // Setting color domains(intervals of values) for our map
         var color_domain = [50, 100, 150, 200, 250, 300, 350, 400, 450];
@@ -49,8 +50,8 @@
             .style("opacity", 0);
 
         var svg = d3.select("#map").append("svg")
-            .attr("width", width)
-            .attr("height", height)
+            .attr("width", "90%")
+            .attr("height", "100%")
             .style("margin", "10px auto");
         //console.log(svg);
 
@@ -58,9 +59,7 @@
 
         //Reading map file and data
 
-        queue() //eslint-disable no-queue
-            .defer(d3.json, "data/county.json")
-            .await(county_map);
+        d3.json("data/county.json",county_map);
 
         //Start of Choropleth drawing
 
@@ -79,7 +78,7 @@
             //Drawing Choropleth
             var g = svg.append("g").attr("class", "region")
                 .attr("id", "reg_1")
-                .attr("transform", "scale(1.5)");
+                .attr("transform", "scale(1.2)");
 
             //g.append("g")
             //.attr("class", "region")
@@ -113,7 +112,7 @@
 
             var ls_w = 20,
                 ls_h = 20;
-
+            // legend.attr("fill","white");
             legend.append("rect")
                 .attr("x", 20)
                 .attr("y", function(d, i) {
@@ -136,7 +135,7 @@
                 });
             //Define Zoom behavior
             var zoom = d3.behavior.zoom()
-                .scaleExtent([1.5, 16])
+                .scaleExtent([1.2, 16])
                 .scale(0.5)
                 .on("zoom", zoomed);
 
