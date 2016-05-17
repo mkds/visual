@@ -8,7 +8,7 @@ $(document).ready(function() {
                 $("#dt1").css("display", "none");
                 $("#dt2").css("display", "none");
                 $("#doc").css("display", "none");
-                $("#right_panel").css("display", "block");
+                $("#right_panel").css("visibility", "visible");
                 $("#left_panel").css("visibility", "visible");
                 $("#top_dest").css("display", "block");
                 break;
@@ -18,7 +18,7 @@ $(document).ready(function() {
                 $("#dt2").css("display", "block");
                 $("#dt1").css("display", "none");
                 $("#left_panel").css("visibility", "visible");
-                $("#right_panel").css("display", "block");
+                $("#right_panel").css("visibility", "visible");
                 $("#top_dest").css("display", "none");
                 break;
             case "Data" :
@@ -27,15 +27,15 @@ $(document).ready(function() {
                 $("#doc").css("display", "none");
                 $("#dt2").css("display", "none");
                 $("#dt1").css("display", "block");
-                $("#left_panel").css("display", "block");
-                $("#right_panel").css("visibility", "visible");
+                $("#left_panel").css("visibility", "visible");
+                $("#right_panel").css("visibility", "hidden");
                 break;
             case "Doc":
                 $("#map").css("display", "none");
                 $("#dt2").css("display", "none");
                 $("#dt1").css("display", "none");
                 $("#doc").css("display", "block");
-                $("#right_panel").css("display", "none");
+                $("#right_panel").css("visibility", "hidden");
                 $("#left_panel").css("visibility", "hidden");
 
 
