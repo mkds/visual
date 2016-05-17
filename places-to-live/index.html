@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="./css/bootstrap-slider.css" />
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css" />
 
-
+    <!--My styleshhet  -->
     <link rel="stylesheet" href="./css/style.css" />
 </head>
 
@@ -25,18 +25,20 @@
     <div class="container-fluid">
         <div class="row" role="navigation">
             <div class="search-header">
+                <!-- For future implementation a query/serach bar
                 <p class="input-group">
                     <input type="text" class="form-control search-form" placeholder="Search" />
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-primary search-btn">
                             <span class="glyphicon glyphicon-filter"></span>
-                        </button>
+                    </button>
                     </span>
-                </p>
+                </p> -->
+                <!-- Navigation Menu -->
                 <ul class="nav nav-pills">
                     <li>
                         <li id="map_sel" role="presentation" class="active"><a>Nation</a></li>
-                        <li id="nj_sel" role="presentation"><a>NJ</a></li>
+                        <li id="nj_sel" role="presentation"><a>State</a></li>
                         <li id="data_sel" role="presentation"><a>Data</a></li>
                     </li>
                 </ul>
@@ -45,45 +47,111 @@
         </div>
 
         <div class="row visual">
+            <!-- Left panel to select variables/theme -->
             <div id="left_panel" class="col-lg-2 left">
-                <h3>Select Factors</h3><br />
-                <select id="vars" class="visual" multiple="multiple">
-                    <option value="cheese">Cheese</option>
-                    <option value="tomatoes">Tomatoes</option>
-                    <option value="mozarella">Mozzarella</option>
-                    <option value="mushrooms">Mushrooms</option>
-                    <option value="pepperoni">Pepperoni</option>
-                    <option value="onions">Onions</option>
-                </select>
+                <h3>Your Interest</h3>
+                <!--Pre-defined interest  -->
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <li id="emp_sel" role="presentation"><a>Employment</a></li>
+                        <li id="ret_sel" role="presentation"><a>Retirement</a></li>
+                        <li id="custom_sel" role="presentation" class="active"><a>Custom</a></li>
+                    </li>
+                </ul>
+                </br>
+                <div id="vars_sec">
+
+                    <h3>Select Factors (9 factors max.)</h3>
+                    <br />
+                    <select id="vars" class="visual" multiple="multiple">
+                        <option value="var">Variables</option>
+                    </select>
+                </div>
             </div>
 
             <div class="col-lg-8 visual">
 
                 <div id="dt1" class="visual" style="display:none">
+                    <h2>Data</h2>
+                    <div id="dt1_table">
+                        <!-- Area to display data in google data table, the table is injected using JS -->
+                    </div>
                 </div>
                 <div id="map" class="visual">
-
-                    <h2>Best places to live</h2>
+                    <!-- Area for map. The map is injected using D3 -->
+                    <h2>Counties color coded as per your interst</h2>
                 </div>
                 <div id="dt2" class="visual" style="display:none">
+                    <!-- Area for state level chart for the "State" meuu -->
+                    <h2>State Level Chart</h2>
+                    <h3 class="center"> State:
+                        <select id="st_sel">
+                        </select>
+                    </h3>
+                    <div id="dt2_chart">
 
+                    </div>
                 </div>
             </div>
             <div id="right_panel" class="col-lg-2 visual right">
-                <h3>Factors and Weights</h3></br>
+                <!-- Show varaiables based on the selection from left panel -->
+                <h3>Factor Importance</h3></br>
                 <div id="wt_scrolls">
-                <span id="wt1_label">Factor 1</span>
-                <input id="wt1" data-slider-id='wt1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="2" data-slider-value="10"/><br />
-                <span id="wt2_label">Factor 1</span>
-                <input id="wt2" data-slider-id='wt2Slider' type="number" data-slider-min="0" data-slider-max="20" data-slider-step="2" data-slider-value="10"/><br />
-                <span id="wt3_label">Factor 1</span>
-                <input id="wt3" data-slider-id='wt3Slider' type="number" data-slider-min="0" data-slider-max="20" data-slider-step="2" data-slider-value="10"/><br />
-                <span id="wt4_label">Factor 1</span>
-                <input id="wt4" data-slider-id='wt4Slider' type="number" data-slider-min="0" data-slider-max="20" data-slider-step="2" data-slider-value="10"/><br />
-                <span id="wt5_label">Factor 1</span>
-                <input id="wt5" data-slider-id='wt5Slider' type="number" data-slider-min="0" data-slider-max="20" data-slider-step="2" data-slider-value="10"/><br />
+
+                    <div>
+                        <span id="wt1_label">Factor 1</span>
+                        <br />
+                        <input id="wt1" data-slider-id='wt1Slider' type="number" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="1" />
+                    </div>
+                    <div>
+                        <span id="wt2_label">Factor 2</span>
+                        <br />
+                        <input id="wt2" data-slider-id='wt2Slider' type="number" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="1" />
+                    </div>
+                    <div>
+                        <span id="wt3_label">Factor 3</span>
+                        <br />
+                        <input id="wt3" data-slider-id='wt3Slider' type="number" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="1" />
+                    </div>
+                    <div>
+                        <span id="wt4_label">Factor 4</span>
+                        <br />
+                        <input id="wt4" data-slider-id='wt4Slider' type="number" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="1" />
+                    </div>
+                    <div>
+                        <span id="wt5_label">Factor 5</span>
+                        <br />
+                        <input id="wt5" data-slider-id='wt5Slider' type="number" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="1" />
+                    </div>
+                    <div class="hide">
+                        <span id="wt6_label">Factor 6</span>
+                        <br />
+                        <input id="wt6" data-slider-id='wt6Slider' type="number" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="1" />
+                    </div>
+                    <div class="hide">
+                        <span id="wt7_label">Factor 7</span>
+                        <br />
+                        <input id="wt7" data-slider-id='wt7Slider' type="number" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="1" />
+                    </div>
+                    <div class="hide">
+                        <span id="wt8_label">Factor 8</span>
+                        <br />
+                        <input id="wt8" data-slider-id='wt8Slider' type="number" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="1" />
+                    </div>
+                    <div class="hide">
+                        <span id="wt9_label">Factor 9</span>
+                        <br />
+                        <input id="wt9" data-slider-id='wt9Slider' type="number" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="1" />
+                    </div>
+                </div>
+                <div id="top_dest">
+                    <h2>Top Counties</h2></br>
+                    <div id=top_chart>
+
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
     <script type="text/javascript" src="./js/init.js"></script>

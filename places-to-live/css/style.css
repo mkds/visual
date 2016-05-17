@@ -2,12 +2,11 @@
 path {
   stroke:white;
   stroke-width: 1px;
-  z-index: 0;
 }
 
 path:hover {
   stroke:black;
-  stroke-width: 1px;
+  stroke-width: 2px;
   z-index: 1
 }
 
@@ -31,7 +30,7 @@ html,body, .container-fluid {
 
   padding: 2px;
   font-size: 14px;
-  background: gray;
+  background: #330000;
   color: #fff;
   border: 1px;
   border-radius: 8px;
@@ -46,7 +45,7 @@ html,body, .container-fluid {
     color: black;
     margin: 0;
 }
-.nav > li {
+.search-header > .nav > li {
     /*float:right;*/
     position: relative;
     left: 80%;
@@ -103,11 +102,11 @@ html,body, .container-fluid {
 }
 .left {
     position: relative;
-    top:20%;
+    top:5%;
 }
 .right{
     position:relative;
-    top:20%;
+    top:5%;
 }
 .slider-selection {
 	background: #aabdaf;
@@ -121,5 +120,14 @@ h2{
 
 h3 {
     font-weight:bold;
+    font-size:16px;
+}
+.center{
+    text-align: center;
+}
+.hide {
+    display: none;
+}
+h4 {
     font-size:16px;
 }
