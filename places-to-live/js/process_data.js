@@ -3,6 +3,7 @@
     // Function level scope variables
     // County data
     var places = {};
+    var places_std = {};
     var col_names = [];
     //Sliders for factor importance
     var all_sliders=[];
@@ -15,8 +16,8 @@
     var gtable, chart;
     // var top_chart;
     // variables used for pre-defined interests
-    var retirement_vars=["Saftey","Good_Health","Associations_per1000","No_Housing_problem","Road_density"];
-    var employment_vars=["Employment_per1000","Employment_pct","Household_income","Saftey","No_Housing_problem"];
+    var retirement_vars=["Saftey","Good_Health","Associations_per1000","Exercise_Facility","Road_density"];
+    var employment_vars=["Employment_per1000","Employment_pct","Household_income","Saftey","Wage_more_than3333_per1000"];
     var top_counties=[];
 
     // Read data from csv
@@ -59,6 +60,49 @@
 
         },
         process_data
+    );
+
+
+    d3.csv("./data/places_data_std.csv", function(d){
+            return {
+                FIPS : +d.FIPS,
+                County : d.County,
+                State : d.State,
+                Saftey : +d.Saftey,
+                Air_Quality : +d.Air_Quality,
+                Water_Area_per100Acre : +d.Water_Area_per100Acre,
+                Good_Health : +d.Good_Health,
+                Rural_pct : +d.Rural_pct,
+                Employment_per1000 : +d.Employment_per1000,
+                No_Housing_problem : +d.No_Housing_problem,
+                Employment_pct : +d.Employment_pct,
+                Household_income : +d.Household_income,
+                Wage_more_than3333_per1000 : +d.Wage_more_than3333_per1000,
+                Exercise_Facility : +d.Exercise_Facility,
+                Age65_plus : +d.Age65_plus,
+                UnProtected_Area : +d.UnProtected_Area,
+                Population : +d.Population,
+                WorkAge_pct : +d.WorkAge_pct,
+                Road_density : +d.Road_density,
+                Primary_care_per1000 : +d.Primary_care_per1000,
+                Associations_per1000 : +d.Associations_per1000,
+                Reatil_jobs_per1000 : +d.Reatil_jobs_per1000,
+                Office_jobs_per1000 : +d.Office_jobs_per1000,
+                Industrial_jobs_per1000 : +d.Industrial_jobs_per1000,
+                Education_jobs_per1000 : +d.Education_jobs_per1000,
+                Service_jobs_per1000 : +d.Service_jobs_per1000,
+                HealthCare_jobs_per1000 : +d.HealthCare_jobs_per1000,
+                Households_per100Acre : +d.Households_per100Acre,
+                Wage_less_than3333_per1000 : +d.Wage_less_than3333_per1000,
+                Availability_healthy_food : +d.Availability_healthy_food,
+                Healthcare_Affordable : +d.Healthcare_Affordable
+            };
+
+
+        },
+        function(d){
+            places_std = d;
+        }
     );
 
     //UI event handling for pre-defined interests
@@ -519,7 +563,7 @@
 
         var values1 = [];
         var values2 = [];
-        places.forEach(function(d) {
+        places_std.forEach(function(d) {
             var row = [d.State,d.County];
             for (var i =0; i < vars_count;i++){
                 row.push(d[weights[i].var_name]);
